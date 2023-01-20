@@ -1,0 +1,3 @@
+export enum DATABASE {
+    MONGODB, MYSQL, POSTGRES, NONE
+}

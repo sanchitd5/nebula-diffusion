@@ -1,0 +1,31 @@
+
+name: Analyse
+on:
+  push:
+    branches:
+      - master # or the name of your main branch
+jobs:
+  build:
+    name: Build
+    runs-on: self-hosted
+    steps:
+      - run: pwd
+      - run: ls -la .
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+          registry-url: "https://registry.npmjs.org" 
+      - run: npm i -g pnpm
+      - run: pnpm i
+      - run: pwd
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v1.1.0
+        env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.verbose=true 
+            -Dproject.settings=/github/workspace/sonar.properties
+            -Dsonar.sources=/github/workspace/src
+      - run: ls -la .

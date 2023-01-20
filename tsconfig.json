@@ -1,0 +1,20 @@
+{
+    "extends": "./node_modules/@tsconfig/node18/tsconfig.json",
+    "compilerOptions": {
+        "outDir": "build",
+        "target": "ES6",
+        "module": "commonjs",
+        "moduleResolution": "Node",
+        "allowJs": true,
+        "noImplicitAny": false
+    },
+    "ts-node": {
+        "files": true,
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
